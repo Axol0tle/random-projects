@@ -1,16 +1,10 @@
-git config --global user.email "landon7071@gmail.com"
-git config --global user.name "Axol0tle"
-
-touch scraper.py
-pip install requests
 import requests
+from bs4 import BeautifulSoup
 
 response = requests.get(
-    url="https://en.wikipedia.org/wiki/Web_scraping","
+    url="https://en.wikipedia.org/wiki/Web_scraping",
 )
-print(response.status_code)
+soup = BeautifulSoup(response.content, 'html.parser')
 
-python3 scraper.py
-200 
-
-pip install beautifulsoup4
+title = soup.find(id="firstHeading")
+print(title.string)
